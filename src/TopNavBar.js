@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import { AppBar, Toolbar, Typography, InputBase, fade, makeStyles } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
+require("dotenv").config();
 
 const useStyles = makeStyles((theme) => ({
 	title: {
+		textDecoration: "none",
+		color: "white",
 		flexGrow: 1,
 		display: "none",
 		[theme.breakpoints.up("sm")]: {
@@ -55,22 +59,37 @@ const useStyles = makeStyles((theme) => ({
 function TopNavBar() {
 	const classes = useStyles();
 	var [searchVal, setSearchVal] = useState("");
+	var history = useHistory();
+	var location = useLocation();
+
+	const submitSearch = (event) => {
+		if (event.key === "Enter") {
+			console.log("value", event.target.value);
+			console.log("history", history.search);
+			console.log("location", location.search);
+			history.push(`/search/${searchVal}`);
+		}
+	};
 
 	return (
 		<AppBar position="static">
 			<Toolbar>
-				<Typography className={classes.title} variant="h6" noWrap>
-					Movie Nomination
-				</Typography>
+				<Link to="/" className={classes.title}>
+					<Typography variant="h6" noWrap>
+						Movie Nomination
+					</Typography>
+				</Link>
 				<div className={classes.search}>
 					<div className={classes.searchIcon}>
 						<SearchIcon />
 					</div>
 					<InputBase
+						value={searchVal}
 						onChange={(event) => {
 							setSearchVal(event.target.value);
 							console.log(searchVal);
 						}}
+						onKeyPress={submitSearch}
 						placeholder="Search…"
 						classes={{
 							root: classes.inputRoot,
