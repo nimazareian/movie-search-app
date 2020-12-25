@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
-import { AppBar, Toolbar, Typography, InputBase, fade, makeStyles } from "@material-ui/core";
-import { Search as SearchIcon } from "@material-ui/icons";
+import { AppBar, Toolbar, Typography, InputBase, fade, makeStyles, Badge, IconButton } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
+import TrophyEmoji from "@material-ui/icons/EmojiEvents";
+import NominateBorderIcon from "@material-ui/icons/FavoriteBorder";
+import NominateIcon from "@material-ui/icons/Favorite";
 require("dotenv").config();
 
 const useStyles = makeStyles((theme) => ({
@@ -98,6 +101,19 @@ function TopNavBar() {
 						inputProps={{ "aria-label": "search" }}
 					/>
 				</div>
+				<IconButton
+					key="close"
+					aria-label="Close"
+					color="inherit"
+					onClick={() => {
+						// TODO show all nomanies
+					}}
+				>
+					<Badge color="secondary" badgeContent={2}>
+						{/* TODO Badge count of number of films nominated */}
+						<TrophyEmoji />
+					</Badge>
+				</IconButton>
 			</Toolbar>
 		</AppBar>
 	);

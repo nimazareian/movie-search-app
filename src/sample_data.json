@@ -1,0 +1,76 @@
+{
+    "Search": [
+        {
+            "Title": "Finding Altamira",
+            "Year": "2016",
+            "imdbID": "tt3014910",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMTUyMjEzNjE5Ml5BMl5BanBnXkFtZTgwNTQ0ODA2OTE@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Finding Bliss",
+            "Year": "2009",
+            "imdbID": "tt1185242",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMjIxMDc1MjEzNV5BMl5BanBnXkFtZTcwNDk2MzQ0Mg@@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Finding Mr. Right",
+            "Year": "2013",
+            "imdbID": "tt2169322",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMjY1ZDY3ZDEtMzUyYi00ZTZjLTljMzQtYmY1ZmE1YmE1NmEzXkEyXkFqcGdeQXVyNzI1NzMxNzM@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Finding Graceland",
+            "Year": "1998",
+            "imdbID": "tt0120026",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMThiN2EwYjUtNTRjYy00OTQxLWI3MDItNmVlNWFlMjkzMDNiXkEyXkFqcGdeQXVyNjU0NTI0Nw@@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Finding Bigfoot",
+            "Year": "2011–",
+            "imdbID": "tt1948830",
+            "Type": "series",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BNmVjNDliOWYtZjU4Yi00MmIzLTlhYWEtYWZjNjMwN2ZiMTAxXkEyXkFqcGdeQXVyMzQ5OTk4OQ@@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Finding Normal",
+            "Year": "2013",
+            "imdbID": "tt2964360",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMTg3MzgwODUwMl5BMl5BanBnXkFtZTgwMDUyMTA1MTE@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Finding Christmas",
+            "Year": "2013",
+            "imdbID": "tt2964654",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMTEwNTIzMTM3MDNeQTJeQWpwZ15BbWU4MDQ3NDA5NjAx._V1_SX300.jpg"
+        },
+        {
+            "Title": "Finding Father Christmas",
+            "Year": "2016",
+            "imdbID": "tt6245488",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BYjgyNjgzYmQtYjFlZi00NGMxLWJlOWEtY2QyNDUwN2IzYTE5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNzk0NTA5NQ@@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Finding Santa",
+            "Year": "2017",
+            "imdbID": "tt7385392",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BNzgwMTBkOGMtNzBlNi00NjdkLWFmYWUtMDAxZmNiNGE4M2U3XkEyXkFqcGdeQXVyNTU2MDQyOTk@._V1_SX300.jpg"
+        },
+        {
+            "Title": "About the Looking for and the Finding of Love",
+            "Year": "2005",
+            "imdbID": "tt0383041",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BM2FlYzY3N2UtOGYzNy00Mjg1LTg2ODUtY2QxZDY5NmQzZjljL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMzA3Njg4MzY@._V1_SX300.jpg"
+        }
+    ],
+    "totalResults": "789",
+    "Response": "True"
+}
