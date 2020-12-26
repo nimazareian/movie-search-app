@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 import MovieCard from "./MovieCard";
+import MovieList from "./MovieList";
 import * as searchResultJSON from "./sample_data.json";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,15 +39,7 @@ function SearchResultPage({ match }) {
 					<h2>
 						{searchResultJSON.totalResults} results found for {searchQuery}
 					</h2>
-					<Grid container spacing={3} direction="row" justify="center" alignItems="flex-start">
-						{searchResultJSON.Search.map((movie) => {
-							return (
-								<Grid item justify="center" alignItems="center" lg={3}>
-									<MovieCard movie={movie} />
-								</Grid>
-							);
-						})}
-					</Grid>
+					<MovieList movieList={searchResultJSON.Search} />
 				</div>
 			) : (
 				<h2>No results found for {searchQuery}</h2>

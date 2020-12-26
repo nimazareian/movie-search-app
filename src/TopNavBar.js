@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
+import { NominationContext } from "./NominationContext";
 import { AppBar, Toolbar, Typography, InputBase, fade, makeStyles, Badge, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import TrophyEmoji from "@material-ui/icons/EmojiEvents";
@@ -62,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 function TopNavBar() {
 	const classes = useStyles();
 	var [searchVal, setSearchVal] = useState("");
+	const [Nominations, setNominations] = useContext(NominationContext);
 	var history = useHistory();
 	var location = useLocation();
 
@@ -90,10 +92,10 @@ function TopNavBar() {
 						value={searchVal}
 						onChange={(event) => {
 							setSearchVal(event.target.value);
-							console.log(searchVal);
 						}}
 						onKeyPress={submitSearch}
 						placeholder="Search…"
+						autoFocus={true}
 						classes={{
 							root: classes.inputRoot,
 							input: classes.inputInput,
@@ -109,7 +111,7 @@ function TopNavBar() {
 						// TODO show all nomanies
 					}}
 				>
-					<Badge color="secondary" badgeContent={2}>
+					<Badge color="secondary" badgeContent={Nominations.length}>
 						{/* TODO Badge count of number of films nominated */}
 						<TrophyEmoji />
 					</Badge>

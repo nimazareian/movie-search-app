@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import { NominationContext } from "./NominationContext";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -19,8 +21,31 @@ const useStyles = makeStyles({
 
 function MovieCard(props) {
 	const classes = useStyles();
+	const [nominations, setNominations] = useContext(NominationContext);
 	const [selected, setSelected] = useState(false);
 	const movie = props.movie;
+
+	const updateNominations = () => {
+		if (localStorage.length >= 5 && !selected) {
+			alert("You have nominated 5 movies!");
+			return;
+		}
+		setSelected(!selected);
+		console.log(selected);
+		if (!selected) {
+			// TODO check if movie already doesnt exist
+			setNominations((prev) => {
+				return [...prev, movie];
+			});
+			localStorage.setItem(movie.imdbID, JSON.stringify(movie));
+		} else {
+			setNominations((prev) => {
+				return prev.filter((nominee) => nominee.imdbID == movie.imdbID);
+			});
+			localStorage.removeItem(movie.imdbID);
+		}
+		console.log("nominations", nominations);
+	};
 
 	return (
 		<div>
@@ -46,13 +71,7 @@ function MovieCard(props) {
 					{/* <Button size="small" color="primary" startIcon={<TrophyEmoji />}>
 						Nominate
 					</Button> */}
-					<ToggleButton
-						value="Nominate"
-						selected={selected}
-						onChange={() => {
-							setSelected(!selected);
-						}}
-					>
+					<ToggleButton value="Nominate" selected={selected} onChange={updateNominations}>
 						<TrophyEmoji color={selected ? "secondary" : "primary"} />
 					</ToggleButton>
 				</CardActions>
