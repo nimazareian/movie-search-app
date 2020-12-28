@@ -13,11 +13,13 @@ const useStyles = makeStyles((theme) => ({
 	title: {
 		textDecoration: "none",
 		color: "white",
-		flexGrow: 1,
 		display: "none",
 		[theme.breakpoints.up("sm")]: {
 			display: "block",
 		},
+	},
+	searchDiv: {
+		marginLeft: "auto",
 	},
 	search: {
 		position: "relative",
@@ -63,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 function TopNavBar() {
 	const classes = useStyles();
 	var [searchVal, setSearchVal] = useState("");
-	const [Nominations, setNominations] = useContext(NominationContext);
+	const [nominations, setNominations] = useContext(NominationContext);
 	var history = useHistory();
 	var location = useLocation();
 
@@ -84,24 +86,26 @@ function TopNavBar() {
 						Movie Nomination
 					</Typography>
 				</Link>
-				<div className={classes.search}>
-					<div className={classes.searchIcon}>
-						<SearchIcon />
+				<div className={classes.searchDiv}>
+					<div className={classes.search}>
+						<div className={classes.searchIcon}>
+							<SearchIcon />
+						</div>
+						<InputBase
+							value={searchVal}
+							onChange={(event) => {
+								setSearchVal(event.target.value);
+							}}
+							onKeyPress={submitSearch}
+							placeholder="Search…"
+							autoFocus={true}
+							classes={{
+								root: classes.inputRoot,
+								input: classes.inputInput,
+							}}
+							inputProps={{ "aria-label": "search" }}
+						/>
 					</div>
-					<InputBase
-						value={searchVal}
-						onChange={(event) => {
-							setSearchVal(event.target.value);
-						}}
-						onKeyPress={submitSearch}
-						placeholder="Search…"
-						autoFocus={true}
-						classes={{
-							root: classes.inputRoot,
-							input: classes.inputInput,
-						}}
-						inputProps={{ "aria-label": "search" }}
-					/>
 				</div>
 				<IconButton
 					key="close"
@@ -111,7 +115,7 @@ function TopNavBar() {
 						// TODO show all nomanies
 					}}
 				>
-					<Badge color="secondary" badgeContent={Nominations.length}>
+					<Badge color="secondary" badgeContent={nominations.length}>
 						{/* TODO Badge count of number of films nominated */}
 						<TrophyEmoji />
 					</Badge>

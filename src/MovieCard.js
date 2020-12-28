@@ -22,29 +22,68 @@ const useStyles = makeStyles({
 function MovieCard(props) {
 	const classes = useStyles();
 	const [nominations, setNominations] = useContext(NominationContext);
-	const [selected, setSelected] = useState(false);
 	const movie = props.movie;
+	const [selected, setSelected] = useState(() => {
+		console.log("nominations", nominations);
+		var alreadyNominated = nominations.some((nominee) => {
+			console.log(`${nominee.imdbID} === ${movie.imdbID}`, nominee.imdbID === movie.imdbID);
+			return nominee.imdbID === movie.imdbID;
+		});
+		return alreadyNominated;
+	});
+	const maxNominations = 5;
 
-	const updateNominations = () => {
-		if (localStorage.length >= 5 && !selected) {
-			alert("You have nominated 5 movies!");
-			return;
-		}
-		setSelected(!selected);
-		console.log(selected);
-		if (!selected) {
-			// TODO check if movie already doesnt exist
+	const removeNomination = () => {
+		setNominations((prev) => {
+			return prev.filter((nominee) => nominee.imdbID === movie.imdbID);
+		});
+		localStorage.removeItem(movie.imdbID);
+	};
+
+	const addNomination = () => {
+		// TODO check if movie already doesnt exist
+		var index = nominations.findIndex((nominee) => nominee.imdbID === movie.imdbID);
+		if (index === -1) {
 			setNominations((prev) => {
 				return [...prev, movie];
 			});
-			localStorage.setItem(movie.imdbID, JSON.stringify(movie));
-		} else {
-			setNominations((prev) => {
-				return prev.filter((nominee) => nominee.imdbID == movie.imdbID);
-			});
-			localStorage.removeItem(movie.imdbID);
 		}
-		console.log("nominations", nominations);
+		localStorage.setItem(movie.imdbID, JSON.stringify(movie));
+	};
+
+	// useEffect(() => {
+	// 	if (selected) {
+	// 		setNominations((prev) => {
+	// 			return prev.filter((nominee) => nominee.imdbID === movie.imdbID);
+	// 		});
+	// 		localStorage.removeItem(movie.imdbID);
+	// 	} else {
+	// 		var index = nominations.findIndex((nominee) => nominee.imdbID === nominee);
+	// 		if (index === -1) {
+	// 			setNominations((prev) => {
+	// 				return [...prev, movie];
+	// 			});
+	// 		}
+	// 		localStorage.setItem(movie.imdbID, JSON.stringify(movie));
+	// 	}
+	// }, [selected]);
+
+	const updateNominations = () => {
+		if (localStorage.length >= maxNominations && !selected) {
+			alert("You have nominated 5 movies!");
+			return;
+		}
+
+		if (!selected) {
+			addNomination();
+		} else {
+			removeNomination();
+		}
+		//setState is async therefore updated state after updating nominations
+		setSelected(!selected);
+		// console.log("selected-af", selected);
+
+		// console.log("nominations", nominations);
 	};
 
 	return (
