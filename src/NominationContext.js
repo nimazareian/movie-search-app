@@ -10,7 +10,8 @@ export const NominationProvider = (props) => {
 		var i = keys.length;
 
 		while (i--) {
-			allSavedNominees.push(JSON.parse(localStorage.getItem(keys[i]))); //convert to JSON
+			//convert to JSON and add to array
+			allSavedNominees.push(JSON.parse(localStorage.getItem(keys[i])));
 		}
 
 		console.log("imported nominees from storage", allSavedNominees);

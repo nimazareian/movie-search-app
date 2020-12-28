@@ -71,9 +71,6 @@ function TopNavBar() {
 
 	const submitSearch = (event) => {
 		if (event.key === "Enter") {
-			console.log("value", event.target.value);
-			console.log("history", history.search);
-			console.log("location", location.search);
 			history.push(`/search/${searchVal}`);
 		}
 	};
@@ -113,10 +110,10 @@ function TopNavBar() {
 					color="inherit"
 					onClick={() => {
 						// TODO show all nomanies
+						console.log("nominations", nominations);
 					}}
 				>
 					<Badge color="secondary" badgeContent={nominations.length}>
-						{/* TODO Badge count of number of films nominated */}
 						<TrophyEmoji />
 					</Badge>
 				</IconButton>
