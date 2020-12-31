@@ -1,14 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 import MovieCard from "./MovieCard";
 
 import { Grid, makeStyles } from "@material-ui/core";
 
+const useStyles = makeStyles((theme) => ({
+	gridItem: {
+		// textAlign: "center", /////////////////////////////////////////////////////////
+	},
+}));
+
 function MovieList(props) {
+	const classes = useStyles();
+
 	return (
-		<Grid container spacing={3} direction="row" justify="center" alignItems="flex-start">
+		<Grid container justify="center" spacing={3} direction="row" alignItems="flex-start">
 			{props.movieList.map((movie) => {
 				return (
-					<Grid item key={movie.imdbID} lg={3}>
+					<Grid className={classes.gridItem} item key={movie.imdbID} lg={3}>
 						<MovieCard movie={movie} />
 					</Grid>
 				);

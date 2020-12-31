@@ -7,7 +7,7 @@ function HomePage() {
 
 	return (
 		<div>
-			<h1>Nominations Home Page</h1>
+			<h1>Nominations:</h1>
 			<MovieList movieList={nominations} />
 		</div>
 	);
