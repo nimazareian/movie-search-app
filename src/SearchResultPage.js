@@ -38,6 +38,10 @@ function SearchResultPage(props) {
 		fetchSearchMovies();
 	}, [searchQuery, page]);
 
+	useEffect(() => {
+		setPage(1);
+	}, [searchQuery]);
+
 	const fetchSearchMovies = async () => {
 		const searchResult = await fetch(
 			`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&s=${searchQuery}&page=${page}`
@@ -62,14 +66,16 @@ function SearchResultPage(props) {
 						{searchResultJSON.totalResults} results found for {searchQuery}
 					</h2>
 					<MovieList movieList={searchResultJSON.Search} />
-					<Pagination
-						count={numPages}
-						page={page}
-						onChange={changePage}
-						className={classes.pageSelector}
-						color="secondary"
-						size="large"
-					/>
+					{numPages > 1 && (
+						<Pagination
+							count={numPages}
+							page={page}
+							onChange={changePage}
+							className={classes.pageSelector}
+							color="secondary"
+							size="large"
+						/>
+					)}
 				</div>
 			) : searchResultJSON.Response === "False" ? (
 				<h2>Error: {searchResultJSON.Error}</h2>
