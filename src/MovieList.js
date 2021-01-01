@@ -5,7 +5,7 @@ import { Grid, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	gridItem: {
-		// textAlign: "center", /////////////////////////////////////////////////////////
+		width: "350px",
 	},
 }));
 

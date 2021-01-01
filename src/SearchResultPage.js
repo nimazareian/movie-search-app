@@ -8,10 +8,8 @@ import Pagination from "@material-ui/lab/Pagination";
 
 const useStyles = makeStyles((theme) => ({
 	searchResult: {
-		boxSizing: "border-box",
-		// padding: "25px 200px",
+		// boxSizing: "border-box",
 		[theme.breakpoints.up("sm")]: {
-			// padding: "25px 50px",
 			display: "block",
 		},
 	},
