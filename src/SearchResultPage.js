@@ -7,81 +7,81 @@ import Pagination from "@material-ui/lab/Pagination";
 // import * as searchResultJSON from "./sample_data.json";
 
 const useStyles = makeStyles((theme) => ({
-	searchResult: {
-		// boxSizing: "border-box",
-		[theme.breakpoints.up("sm")]: {
-			display: "block",
-		},
-	},
-	CircularProgress: {
-		// display: flex;
-		// justify-content: center;
-		// align-items: center;
-	},
-	pageSelector: {
-		margin: "35px 0",
-		display: "flex",
-		justifyContent: "center",
-	},
+  searchResult: {
+    // boxSizing: "border-box",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+    },
+  },
+  CircularProgress: {
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+  },
+  pageSelector: {
+    margin: "35px 0",
+    display: "flex",
+    justifyContent: "center",
+  },
 }));
 
 function SearchResultPage(props) {
-	const classes = useStyles();
-	const searchQuery = props.match.params.id;
-	const [searchResultJSON, setSearchResultJSON] = useState({});
-	const [page, setPage] = useState(1);
-	const [numPages, setNumPages] = useState(4);
+  const classes = useStyles();
+  const searchQuery = props.match.params.id;
+  const [searchResultJSON, setSearchResultJSON] = useState({});
+  const [page, setPage] = useState(1);
+  const [numPages, setNumPages] = useState(4);
 
-	useEffect(() => {
-		fetchSearchMovies();
-	}, [searchQuery, page]);
+  useEffect(() => {
+    const fetchSearchMovies = async () => {
+      const searchResult = await fetch(
+        `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&s=${searchQuery}&page=${page}`
+      );
 
-	useEffect(() => {
-		setPage(1);
-	}, [searchQuery]);
+      const searchResultJSON = await searchResult.json();
+      setSearchResultJSON(searchResultJSON);
+      setNumPages(Math.ceil(searchResultJSON.totalResults / 10));
+    };
 
-	const fetchSearchMovies = async () => {
-		const searchResult = await fetch(
-			`https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&s=${searchQuery}&page=${page}`
-		);
+    fetchSearchMovies();
+  }, [searchQuery, page]);
 
-		const searchResultJSON = await searchResult.json();
-		setSearchResultJSON(searchResultJSON);
-		setNumPages(Math.ceil(searchResultJSON.totalResults / 10));
-	};
+  useEffect(() => {
+    setPage(1);
+  }, [searchQuery]);
 
-	const changePage = (event, value) => {
-		setPage(value);
-		window.scrollTo(0, 0);
-		console.log(page);
-	};
+  const changePage = (event, value) => {
+    setPage(value);
+    window.scrollTo(0, 0);
+    console.log(page);
+  };
 
-	return (
-		<div className={classes.searchResult}>
-			{searchResultJSON.Response === "True" ? (
-				<div>
-					<h2>
-						{searchResultJSON.totalResults} results found for {searchQuery}
-					</h2>
-					<MovieList movieList={searchResultJSON.Search} />
-					{numPages > 1 && (
-						<Pagination
-							count={numPages}
-							page={page}
-							onChange={changePage}
-							className={classes.pageSelector}
-							color="secondary"
-							size="large"
-						/>
-					)}
-				</div>
-			) : searchResultJSON.Response === "False" ? (
-				<h2>Error: {searchResultJSON.Error}</h2>
-			) : (
-				<CircularProgress color="secondary" />
-			)}
-		</div>
-	);
+  return (
+    <div className={classes.searchResult}>
+      {searchResultJSON.Response === "True" ? (
+        <div>
+          <h2>
+            {searchResultJSON.totalResults} results found for {searchQuery}
+          </h2>
+          <MovieList movieList={searchResultJSON.Search} />
+          {numPages > 1 && (
+            <Pagination
+              count={numPages}
+              page={page}
+              onChange={changePage}
+              className={classes.pageSelector}
+              color="secondary"
+              size="large"
+            />
+          )}
+        </div>
+      ) : searchResultJSON.Response === "False" ? (
+        <h2>Error: {searchResultJSON.Error}</h2>
+      ) : (
+        <CircularProgress color="secondary" />
+      )}
+    </div>
+  );
 }
 
 export default SearchResultPage;
