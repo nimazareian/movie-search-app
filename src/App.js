@@ -45,7 +45,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <NominationProvider>
-        <Router>
+        <Router basename="/movie-search-app">
           <div className="App">
             <TopNavBar />
             <Switch>
