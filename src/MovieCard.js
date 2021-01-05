@@ -10,6 +10,10 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import TrophyEmoji from "@material-ui/icons/EmojiEvents";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import Box from "@material-ui/core/Box";
@@ -82,13 +86,14 @@ function MovieCard(props) {
   const classes = useStyles();
   const [nominations, setNominations] = useContext(NominationContext);
   const movie = props.movie;
+  const maxNominations = 5;
+  const [openMaxAlert, setOpenMaxAlert] = useState(false);
   const [selected, setSelected] = useState(() => {
     var alreadyNominated = nominations.some((nominee) => {
       return nominee.imdbID === movie.imdbID;
     });
     return alreadyNominated;
   });
-  const maxNominations = 5;
 
   const removeNomination = () => {
     setNominations((prev) => {
@@ -109,7 +114,7 @@ function MovieCard(props) {
 
   const updateNominations = () => {
     if (localStorage.length >= maxNominations && !selected) {
-      alert("You have nominated 5 movies!");
+      setOpenMaxAlert(true);
       return;
     }
 
@@ -150,8 +155,21 @@ function MovieCard(props) {
           <h2 className={classes.movieTitle}>{movie.Title}</h2>
           <h3 className={classes.movieYear}>{movie.Year}</h3>
         </Box>
-        {/* </CardActionArea> */}
       </Card>
+      <Dialog
+        open={openMaxAlert}
+        onClose={() => {
+          setOpenMaxAlert(false);
+        }}
+        aria-labelledby="Max Nominations Reached"
+      >
+        <DialogTitle id="alert-dialog-title">{"Alert:"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {`You have nominated ${maxNominations} movies, please remove some of your nominations to be able to add this movie.`}
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
