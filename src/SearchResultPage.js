@@ -42,8 +42,6 @@ function SearchResultPage(props) {
       setSearchResultJSON(searchResultJSON);
       setNumPages(Math.ceil(searchResultJSON.totalResults / 10));
     };
-    console.log(searchQuery);
-    debugger;
     fetchSearchMovies();
   }, [searchQuery, page]);
 
