@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import TopNavBar from "./TopNavBar";
 import HomePage from "./HomePage";
 import SearchResultPage from "./SearchResultPage";
+import PageNotFound from "./PageNotFound";
 import { NominationProvider } from "./NominationContext";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -53,6 +54,7 @@ function App() {
             <Switch>
               <Route path={`${ROOT_URL}`} exact component={HomePage} />
               <Route path={`${ROOT_URL}/search/:id`} component={SearchResultPage} />
+              <Route path={`${ROOT_URL}`} component={PageNotFound} />
             </Switch>
           </div>
         </Router>
