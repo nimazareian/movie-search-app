@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  nominationIcon: {
+    marginLeft: 7,
+  },
 }));
 
 function TopNavBar() {
@@ -105,19 +108,9 @@ function TopNavBar() {
             />
           </div>
         </div>
-        <IconButton
-          key="close"
-          aria-label="Close"
-          color="inherit"
-          onClick={() => {
-            // TODO show all nomanies
-            console.log("nominations", nominations);
-          }}
-        >
-          <Badge color="secondary" badgeContent={nominations.length}>
-            <TrophyEmoji />
-          </Badge>
-        </IconButton>
+        <Badge color="secondary" badgeContent={nominations.length}>
+          <TrophyEmoji className={classes.nominationIcon} />
+        </Badge>
       </Toolbar>
     </AppBar>
   );
