@@ -2,7 +2,7 @@ import React, { useState, createContext } from "react";
 
 export const NominationContext = createContext();
 
-export const NominationProvider = (props) => {
+export const NominationProvider = ({ children }) => {
   const [nominations, setNominations] = useState(() => {
     // Get all previous nominees from browser localStorage
     var allSavedNominees = [];
@@ -18,7 +18,5 @@ export const NominationProvider = (props) => {
     return allSavedNominees;
   });
 
-  return (
-    <NominationContext.Provider value={[nominations, setNominations]}>{props.children}</NominationContext.Provider>
-  );
+  return <NominationContext.Provider value={[nominations, setNominations]}>{children}</NominationContext.Provider>;
 };

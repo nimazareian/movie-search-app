@@ -13,7 +13,6 @@ import {
   Badge,
   Tooltip,
   Zoom,
-  useMediaQuery,
   useTheme,
   IconButton,
 } from "@material-ui/core";
@@ -72,16 +71,11 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  nominationIcon: {
-    // marginLeft: 7,
-  },
 }));
 
 function TopNavBar() {
   const classes = useStyles();
   const [nominations, setNominations] = useContext(NominationContext);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   var [searchVal, setSearchVal] = useState("");
   var history = useHistory();
 

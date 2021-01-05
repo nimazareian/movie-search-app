@@ -22,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SearchResultPage(props) {
+function SearchResultPage({ match }) {
   const classes = useStyles();
-  const searchQuery = props.match.params.id;
+  const searchQuery = match.params.id;
   const [searchResultJSON, setSearchResultJSON] = useState({});
   const [page, setPage] = useState(1);
   const [numPages, setNumPages] = useState(4);

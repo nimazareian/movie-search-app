@@ -16,19 +16,13 @@ const useStyles = makeStyles((theme) => ({
   page: {
     maxWidth: 1500,
     margin: "0 auto",
-    [theme.breakpoints.up("sm")]: {
-      //   width: "auto",
-    },
+    [theme.breakpoints.up("sm")]: {},
   },
 }));
 
 function App() {
   const classes = useStyles();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  // const myColors = {
-
-  // }
 
   const theme = React.useMemo(
     () =>

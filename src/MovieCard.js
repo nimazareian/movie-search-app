@@ -1,21 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import { NominationContext } from "./NominationContext";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TrophyEmoji from "@material-ui/icons/EmojiEvents";
-import ToggleButton from "@material-ui/lab/ToggleButton";
 import Box from "@material-ui/core/Box";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
@@ -82,10 +76,9 @@ const useStyles = makeStyles({
   },
 });
 
-function MovieCard(props) {
+function MovieCard({ movie }) {
   const classes = useStyles();
   const [nominations, setNominations] = useContext(NominationContext);
-  const movie = props.movie;
   const maxNominations = 5;
   const [openMaxAlert, setOpenMaxAlert] = useState(false);
   const [selected, setSelected] = useState(() => {
@@ -130,7 +123,6 @@ function MovieCard(props) {
   return (
     <div>
       <Card className={classes.card}>
-        {/* <CardActionArea> */}
         {movie.Poster !== "N/A" && (
           <CardMedia
             className={classes.cardImg}
