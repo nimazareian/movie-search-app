@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
 import { NominationContext } from "./NominationContext";
+import { ROOT_URL } from "./App";
 import { AppBar, Toolbar, Typography, InputBase, fade, makeStyles, Badge, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import TrophyEmoji from "@material-ui/icons/EmojiEvents";
@@ -71,14 +72,14 @@ function TopNavBar() {
 
   const submitSearch = (event) => {
     if (event.key === "Enter") {
-      history.push(`/search/${searchVal}`);
+      history.push(`${ROOT_URL}/search/${searchVal}`);
     }
   };
 
   return (
     <AppBar position="static">
       <Toolbar>
-        <Link to="/" className={classes.title}>
+        <Link to={`${ROOT_URL}`} className={classes.title}>
           <Typography variant="h6" noWrap>
             Movie Nomination
           </Typography>

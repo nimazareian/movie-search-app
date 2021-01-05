@@ -9,6 +9,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+export const ROOT_URL = "/movie-search-app";
+
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -45,12 +47,12 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <NominationProvider>
-        <Router basename="/movie-search-app">
+        <Router>
           <div className="App">
             <TopNavBar />
             <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/search/:id" component={SearchResultPage} />
+              <Route path={`/${ROOT_URL}`} exact component={HomePage} />
+              <Route path={`/${ROOT_URL}/search/:id`} component={SearchResultPage} />
             </Switch>
           </div>
         </Router>
