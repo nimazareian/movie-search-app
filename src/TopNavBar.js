@@ -3,7 +3,20 @@ import { Link, useHistory } from "react-router-dom";
 
 import { NominationContext } from "./NominationContext";
 import { ROOT_URL } from "./App";
-import { AppBar, Toolbar, Typography, InputBase, fade, makeStyles, Badge, Tooltip, Zoom } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  InputBase,
+  fade,
+  makeStyles,
+  Badge,
+  Tooltip,
+  Zoom,
+  useMediaQuery,
+  useTheme,
+  IconButton,
+} from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import TrophyEmoji from "@material-ui/icons/EmojiEvents";
 require("dotenv").config();
@@ -60,14 +73,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   nominationIcon: {
-    marginLeft: 7,
+    // marginLeft: 7,
   },
 }));
 
 function TopNavBar() {
   const classes = useStyles();
-  var [searchVal, setSearchVal] = useState("");
   const [nominations, setNominations] = useContext(NominationContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  var [searchVal, setSearchVal] = useState("");
   var history = useHistory();
 
   const submitSearch = (event) => {
@@ -105,11 +120,15 @@ function TopNavBar() {
             />
           </div>
         </div>
-        <Tooltip TransitionComponent={Zoom} title={`${nominations.length} Movies Nominated`}>
-          <Badge color="secondary" badgeContent={nominations.length}>
-            <TrophyEmoji className={classes.nominationIcon} />
-          </Badge>
-        </Tooltip>
+        <Link to={`${ROOT_URL}`}>
+          <IconButton aria-label="Nominations">
+            <Tooltip TransitionComponent={Zoom} title={`${nominations.length} Movies Nominated`}>
+              <Badge color="secondary" badgeContent={nominations.length}>
+                <TrophyEmoji className={classes.nominationIcon} />
+              </Badge>
+            </Tooltip>
+          </IconButton>
+        </Link>
       </Toolbar>
     </AppBar>
   );
