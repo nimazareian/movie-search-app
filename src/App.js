@@ -51,8 +51,8 @@ function App() {
           <div className="App">
             <TopNavBar />
             <Switch>
-              <Route path={`/${ROOT_URL}`} exact component={HomePage} />
-              <Route path={`/${ROOT_URL}/search/:id`} component={SearchResultPage} />
+              <Route path={`${ROOT_URL}`} exact component={HomePage} />
+              <Route path={`${ROOT_URL}/search/:id`} component={SearchResultPage} />
             </Switch>
           </div>
         </Router>
