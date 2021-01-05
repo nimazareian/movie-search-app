@@ -1,13 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { NominationContext } from "./NominationContext";
 import { ROOT_URL } from "./App";
-import { AppBar, Toolbar, Typography, InputBase, fade, makeStyles, Badge, IconButton } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, InputBase, fade, makeStyles, Badge, Tooltip, Zoom } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import TrophyEmoji from "@material-ui/icons/EmojiEvents";
-import NominateBorderIcon from "@material-ui/icons/FavoriteBorder";
-import NominateIcon from "@material-ui/icons/Favorite";
 require("dotenv").config();
 
 const useStyles = makeStyles((theme) => ({
@@ -71,7 +69,6 @@ function TopNavBar() {
   var [searchVal, setSearchVal] = useState("");
   const [nominations, setNominations] = useContext(NominationContext);
   var history = useHistory();
-  var location = useLocation();
 
   const submitSearch = (event) => {
     if (event.key === "Enter") {
@@ -108,9 +105,11 @@ function TopNavBar() {
             />
           </div>
         </div>
-        <Badge color="secondary" badgeContent={nominations.length}>
-          <TrophyEmoji className={classes.nominationIcon} />
-        </Badge>
+        <Tooltip TransitionComponent={Zoom} title={`${nominations.length} Movies Nominated`}>
+          <Badge color="secondary" badgeContent={nominations.length}>
+            <TrophyEmoji className={classes.nominationIcon} />
+          </Badge>
+        </Tooltip>
       </Toolbar>
     </AppBar>
   );
