@@ -1,18 +1,29 @@
 import React from "react";
 import "./index.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import TopNavBar from "./TopNavBar";
 import HomePage from "./HomePage";
 import SearchResultPage from "./SearchResultPage";
-import PageNotFound from "./PageNotFound";
 import { NominationProvider } from "./NominationContext";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { makeStyles } from "@material-ui/core";
 
 export const ROOT_URL = "/movie-search-app";
 
+const useStyles = makeStyles((theme) => ({
+  page: {
+    maxWidth: 1500,
+    margin: "0 auto",
+    [theme.breakpoints.up("sm")]: {
+      //   width: "auto",
+    },
+  },
+}));
+
 function App() {
+  const classes = useStyles();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   // const myColors = {
@@ -52,9 +63,13 @@ function App() {
           <div className="App">
             <TopNavBar />
             <Switch>
-              <Route path={`${ROOT_URL}`} exact component={HomePage} />
-              <Route path={`${ROOT_URL}/search/:id`} component={SearchResultPage} />
-              <Route path={`${ROOT_URL}`} component={PageNotFound} />
+              <div className={classes.page}>
+                <Route path={`${ROOT_URL}`} exact component={HomePage} />
+                <Route path={`${ROOT_URL}/search/:id`} component={SearchResultPage} />
+                <Route path="*">
+                  <Redirect to={`${ROOT_URL}`} />
+                </Route>
+              </div>
             </Switch>
           </div>
         </Router>
