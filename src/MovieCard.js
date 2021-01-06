@@ -13,6 +13,7 @@ import TrophyEmoji from "@material-ui/icons/EmojiEvents";
 import Box from "@material-ui/core/Box";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
+import { CardActionArea } from "@material-ui/core";
 
 const cardHeight = 360;
 const cardWidth = 270;
@@ -120,6 +121,8 @@ function MovieCard({ movie }) {
     setSelected(!selected);
   };
 
+  const viewDetailsInIMDB = () => window.open(`https://www.imdb.com/title/${movie.imdbID}/`, "_blank");
+
   return (
     <div>
       <Card className={classes.card}>
@@ -143,11 +146,14 @@ function MovieCard({ movie }) {
             <TrophyEmoji fontSize="large" color={selected ? "secondary" : "primary"} />
           </Tooltip>
         </IconButton>
-        <Box py={3} px={3} className={classes.content}>
-          <h2 className={classes.movieTitle}>{movie.Title}</h2>
-          <h3 className={classes.movieYear}>{movie.Year}</h3>
-        </Box>
+        <CardActionArea onClick={viewDetailsInIMDB}>
+          <Box py={3} px={3} className={classes.content}>
+            <h2 className={classes.movieTitle}>{movie.Title}</h2>
+            <h3 className={classes.movieYear}>{movie.Year}</h3>
+          </Box>
+        </CardActionArea>
       </Card>
+
       <Dialog
         open={openMaxAlert}
         onClose={() => {
